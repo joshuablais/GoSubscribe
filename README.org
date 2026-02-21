@@ -1,0 +1,13 @@
+#+title: Readme
+
+Go Subscribe - A simple subscription tool
+
+- Attach to a postgres database
+- Accept subscription calls in the form of: email@email.com/date added
+- Rate limiting
+- Form validation
+-  
+
+
+** Project Structure
+** 
