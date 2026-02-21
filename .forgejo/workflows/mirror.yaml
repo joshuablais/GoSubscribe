@@ -1,0 +1,39 @@
+name: Mirror to External Platforms
+on:
+  push:
+    branches: [master, main]
+jobs:
+  mirror:
+    runs-on: docker 
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Extract repository name
+        id: repo
+        run: |
+          # Get repo name from git remote origin URL
+          REPO_NAME=$(git remote get-url origin | sed 's/.*\///' | sed 's/\.git$//')
+          echo "name=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "Repository name: $REPO_NAME"          
+      
+      - name: Mirror to GitHub
+        env:
+          MIRROR_GITHUB: ${{ secrets.MIRROR_GITHUB }}
+          REPO_NAME: ${{ steps.repo.outputs.name }}
+        run: |
+          echo "Mirroring to GitHub: joshuablais/$REPO_NAME"
+          git remote add github https://$MIRROR_GITHUB@github.com/joshuablais/$REPO_NAME.git || \
+            git remote set-url github https://$MIRROR_GITHUB@github.com/joshuablais/$REPO_NAME.git
+          git push --mirror github          
+      
+      - name: Mirror to Codeberg
+        env:
+          MIRROR_CODEBERG: ${{ secrets.MIRROR_CODEBERG }}
+          REPO_NAME: ${{ steps.repo.outputs.name }}
+        run: |
+          echo "Mirroring to Codeberg: joshuablais/$REPO_NAME"
+          git remote add codeberg https://$MIRROR_CODEBERG@codeberg.org/joshuablais/$REPO_NAME.git || \
+            git remote set-url codeberg https://$MIRROR_CODEBERG@codeberg.org/joshuablais/$REPO_NAME.git
+          git push --mirror codeberg          
