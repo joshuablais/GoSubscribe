@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/jblais493/Boilerplate/handlers"
-	"github.com/jblais493/Boilerplate/internal/initializers"
+	"github.com/joshuablais/GoSubscribe/initializers"
 	"github.com/labstack/echo/v4"
 	_ "github.com/lib/pq"
 )
