@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/jblais493/Boilerplate/handlers"
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/joshuablais/GoSubscribe/handlers"
 	"github.com/joshuablais/GoSubscribe/initializers"
-	"github.com/labstack/echo/v4"
-	_ "github.com/lib/pq"
+	"net/http"
 )
 
 func init() {
@@ -16,13 +16,18 @@ func init() {
 
 func main() {
 	// Echo instance
-	e := echo.New()
-	e.Static("/public", "public")
+	cfg := config.LoadConfig()
+	mux := http.NewServeMux()
 
-	// Routes from routes.go
-	handlers.Routes(e)
+	// Static file serving
+	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	e.HTTPErrorHandler = handlers.LostPage
-	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	Routes(mux, cfg)
+
+	// Routes
+	slog.Info("starting server", "addr", ":3001")
+	if err := http.ListenAndServe(":3001", mux); err != nil {
+		slog.Error("server error", "err", err)
+		os.Exit(1)
+	}
 }
