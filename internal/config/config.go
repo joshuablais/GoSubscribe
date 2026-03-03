@@ -2,7 +2,6 @@
 package config
 
 import (
-	"github.com/joshuablais/precipice/internal/assets"
 	"os"
 	"path/filepath"
 )
@@ -17,7 +16,6 @@ type Config struct {
 	Environment     string
 	SiteURL         string
 	SiteDescription string
-	AssetManager    *assets.Manager
 	Author          string
 }
 
@@ -32,7 +30,6 @@ func LoadConfig() *Config {
 		Environment:     getEnv("ENVIRONMENT", "development"),
 		SiteURL:         getEnv("SITE_URL", "https://yoursite.com"),
 		SiteDescription: getEnv("SITE_DESCRIPTION", "My awesome blog"),
-		AssetManager:    assets.NewManager(),
 		Author:          getEnv("AUTHOR", "Your Name"),
 	}
 }

@@ -2,15 +2,16 @@ package main
 
 import (
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/joshuablais/GoSubscribe/handlers"
+	// "github.com/joshuablais/GoSubscribe/handlers"
 	"github.com/joshuablais/GoSubscribe/initializers"
+	"github.com/joshuablais/GoSubscribe/internal/config"
 	"net/http"
 )
 
 func init() {
-	initializers.LoadEnvVars()
-	initializers.InitPostgres()
-	initializers.SyncDatabase()
+	// initializers.LoadEnvVars()
+	// initializers.InitPostgres()
+	// initializers.SyncDatabase()
 	initializers.InitResend()
 }
 
@@ -20,7 +21,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Static file serving
-	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	// mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	Routes(mux, cfg)
 
