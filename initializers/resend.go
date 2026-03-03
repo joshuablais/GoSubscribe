@@ -2,7 +2,7 @@ package initializers
 
 import (
 	"fmt"
-	"github.com/resendlabs/resend-go/v3"
+	"github.com/resend/resend-go/v3"
 	"os"
 )
 
