@@ -54,7 +54,7 @@
               gotools
               go-tools
               delve
-              age # add this — you need it for secret decryption
+              age
             ];
 
             shellHook = ''
