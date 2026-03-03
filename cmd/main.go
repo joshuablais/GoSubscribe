@@ -8,6 +8,7 @@ import (
 	"github.com/joshuablais/GoSubscribe/internal/config"
 	"log/slog"
 	"net/http"
+	"os"
 )
 
 func init() {
