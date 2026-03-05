@@ -22,6 +22,38 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
+      nixosModules.default =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        {
+          options.services.gosubscribe = {
+            enable = lib.mkEnableOption "gosubscribe";
+            port = lib.mkOption {
+              type = lib.types.port;
+              default = 3001;
+            };
+          };
+
+          config = lib.mkIf config.services.gosubscribe.enable {
+            systemd.services.gosubscribe = {
+              wantedBy = [ "multi-user.target" ];
+              serviceConfig = {
+                ExecStart = "${self.packages.${pkgs.system}.default}/bin/gosubscribe";
+                Restart = "always";
+                DynamicUser = true;
+                EnvironmentFile = "/run/secrets/gosubscribe";
+              };
+              environment = {
+                PORT = toString config.services.gosubscribe.port;
+              };
+            };
+          };
+        };
+
       devShells = forAllSystems (
         system:
         let
