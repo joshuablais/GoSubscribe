@@ -6,6 +6,7 @@ import (
 	// "github.com/joshuablais/GoSubscribe/handlers"
 	"github.com/joshuablais/GoSubscribe/initializers"
 	"github.com/joshuablais/GoSubscribe/internal/config"
+	"github.com/joshuablais/GoSubscribe/internal/routes"
 	"log/slog"
 	"net/http"
 	"os"
@@ -27,7 +28,7 @@ func main() {
 	// Static file serving
 	// mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	Routes(mux, cfg)
+	routes.Routes(mux, cfg)
 
 	// Routes
 	slog.Info("starting server", "addr", ":3001")

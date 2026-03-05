@@ -1,4 +1,4 @@
-package main
+package routes
 
 import (
 	"github.com/joshuablais/GoSubscribe/internal/config"

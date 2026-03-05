@@ -35,6 +35,22 @@
         }
       );
 
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.buildGoModule {
+            pname = "gosubscribe";
+            version = "0.1.0";
+            src = ./.;
+            vendorHash = "sha256-u6TBAalXCKjhm1Nb3lq8Z698JN3qOEk66mm96TS4HiE=";
+            subPackages = [ "cmd/gosubscribe" ];
+          };
+        }
+      );
+
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
     };
 }
