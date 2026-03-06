@@ -34,6 +34,10 @@
     package = pkgs.postgresql_18;
     initialDatabases = [ { name = "gosubscribe"; } ];
     listen_addresses = "127.0.0.1";
+    initialScript = ''
+      CREATE USER joshua;
+      GRANT ALL PRIVILEGES ON DATABASE gosubscribe TO joshua;
+    '';
   };
 
   # ── Shell ──────────────────────────────────────────────────────────────────
