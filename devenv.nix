@@ -15,6 +15,8 @@
     just
     air
     gopls
+    sqlc
+    go-migrate
     golangci-lint
     gotools
     go-tools

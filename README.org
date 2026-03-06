@@ -11,3 +11,8 @@ Go Subscribe - A simple subscription tool
 
 ** Project Structure
 ** 
+
+* Roadmap
+** TODO postgres connection
+** TODO schema
+** TODO 
