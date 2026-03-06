@@ -1,8 +1,6 @@
 package main
 
 import (
-	// TODO Setup pgx for postgres
-	// "github.com/jackc/pgx/v5/pgxpool"
 	// "github.com/joshuablais/GoSubscribe/handlers"
 	"github.com/joshuablais/GoSubscribe/initializers"
 	"github.com/joshuablais/GoSubscribe/internal/config"
@@ -13,8 +11,6 @@ import (
 )
 
 func init() {
-	// TODO Get postgres initialized
-	// initializers.LoadEnvVars()
 	initializers.InitPostgres()
 	// initializers.SyncDatabase()
 	initializers.InitResend()
