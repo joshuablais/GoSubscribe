@@ -21,13 +21,20 @@
     delve
 
     # Database
-    postgres_18
     sqlc
     go-migrate
   ];
 
   # ── Languages ──────────────────────────────────────────────────────────────
   languages.go.enable = true;
+
+  # ── Database ──────────────────────────────────────────────────────────────
+  services.postgres = {
+    enable = true;
+    package = pkgs.postgresql_18;
+    initialDatabases = [ { name = "gosubscribe"; } ];
+    listen_addresses = "127.0.0.1";
+  };
 
   # ── Shell ──────────────────────────────────────────────────────────────────
   enterShell = ''
