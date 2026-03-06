@@ -31,5 +31,5 @@ func InitPostgres() {
 		log.Fatalf("Failed to ping database: %v", err)
 	}
 
-	fmt.Println("Postgres connected")
+	log.Println("Postgres connected:", DB.Stat().TotalConns())
 }
