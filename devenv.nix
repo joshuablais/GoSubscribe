@@ -15,12 +15,15 @@
     just
     air
     gopls
-    sqlc
-    go-migrate
     golangci-lint
     gotools
     go-tools
     delve
+
+    # Database
+    postgres_18
+    sqlc
+    go-migrate
   ];
 
   # ── Languages ──────────────────────────────────────────────────────────────
