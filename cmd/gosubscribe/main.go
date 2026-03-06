@@ -15,7 +15,7 @@ import (
 func init() {
 	// TODO Get postgres initialized
 	// initializers.LoadEnvVars()
-	// initializers.InitPostgres()
+	initializers.InitPostgres()
 	// initializers.SyncDatabase()
 	initializers.InitResend()
 }

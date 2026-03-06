@@ -30,4 +30,6 @@ func InitPostgres() {
 	if err = DB.Ping(context.Background()); err != nil {
 		log.Fatalf("Failed to ping database: %v", err)
 	}
+
+	fmt.Println("Postgres connected")
 }
