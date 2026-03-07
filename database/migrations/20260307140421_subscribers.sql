@@ -1,4 +1,5 @@
--- 000001_create_subscribers.up.sql
+-- +goose Up
+-- +goose StatementBegin
 CREATE TABLE subscribers (
     id          BIGSERIAL PRIMARY KEY,
     email       TEXT NOT NULL UNIQUE,
@@ -8,3 +9,9 @@ CREATE TABLE subscribers (
     created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+-- +goose StatementEnd
+
+-- +goose Down
+-- +goose StatementBegin
+DROP TABLE IF EXISTS subscribers;
+-- +goose StatementEnd
