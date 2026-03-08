@@ -44,12 +44,18 @@
 
   # ── Scripts (Replace Just) ──────────────────────────────────────────────────────────────
   scripts = {
-    generate.exec = "templ generate";
-    run.exec = "generate && go run cmd/main.go";
     dev.exec = "air";
     build.exec = "generate && go build -o bin/precipice .";
     clean.exec = "rm -rf bin/ tmp/ **/*_templ.go";
     cssbuild.exec = "esbuild static/main.css --bundle --minify --outfile=dist/css/main.css";
+    goose-create.exec = "goose create -dir ./database/migrations";
+    # Goose for migrations
+    # goose status
+    # goose up
+    # goose down
+    nb.exec = "nix build";
+    nr.exec = "nix run";
+
   };
 
   # ── Shell ──────────────────────────────────────────────────────────────────
