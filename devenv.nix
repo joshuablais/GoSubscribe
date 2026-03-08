@@ -12,7 +12,6 @@
 
   # ── Packages ───────────────────────────────────────────────────────────────
   packages = with pkgs; [
-    just
     air
     gopls
     golangci-lint
@@ -43,16 +42,26 @@
     '';
   };
 
+  # ── Scripts (Replace Just) ──────────────────────────────────────────────────────────────
+  scripts = {
+    generate.exec = "templ generate";
+    run.exec = "generate && go run cmd/main.go";
+    dev.exec = "air";
+    build.exec = "generate && go build -o bin/precipice .";
+    clean.exec = "rm -rf bin/ tmp/ **/*_templ.go";
+    cssbuild.exec = "esbuild static/main.css --bundle --minify --outfile=dist/css/main.css";
+  };
+
   # ── Shell ──────────────────────────────────────────────────────────────────
   enterShell = ''
-    echo "  Go Subscribe Development Environment"
+        echo "  Go Subscribe Development Environment"
 
-    # ── Secrets ──────────────────────────────────────────────────────────────
-    [[ -n "$RESEND_API_KEY" ]] \
-      && echo "  ✓ RESEND_API_KEY" \
-      || echo "  ✗ RESEND_API_KEY missing"
+        # ── Secrets ──────────────────────────────────────────────────────────────
+        [[ -n "$RESEND_API_KEY" ]] \
+          && echo "  ✓ RESEND_API_KEY" \
+          || echo "  ✗ RESEND_API_KEY missing"
 
-    echo "  just dev    - live reload"
-    echo "  just build  - production build"
+    echo "  dev    - live reload"
+    echo "  build  - production build"
   '';
 }
