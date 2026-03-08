@@ -26,7 +26,10 @@
   ];
 
   # ── Languages ──────────────────────────────────────────────────────────────
-  languages.go.enable = true;
+  languages.go = {
+    enable = true;
+    package = pkgs.go_1_26;
+  };
 
   # ── Database ──────────────────────────────────────────────────────────────
   services.postgres = {
